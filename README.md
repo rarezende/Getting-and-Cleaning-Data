@@ -10,14 +10,14 @@ in the zip file provided.
 
 The script reads the following files:
 
-"./UCI HAR Dataset/features.txt"
-"./UCI HAR Dataset/activity_labels.txt"
-"./UCI HAR Dataset/test/X_test.txt"
-"./UCI HAR Dataset/test/y_test.txt"
-"./UCI HAR Dataset/test/subject_test.txt"
-"./UCI HAR Dataset/train/X_train.txt"
-"./UCI HAR Dataset/train/y_train.txt"
-"./UCI HAR Dataset/train/subject_train.txt"
+* "./UCI HAR Dataset/features.txt"
+* "./UCI HAR Dataset/activity_labels.txt"
+* "./UCI HAR Dataset/test/X_test.txt"
+* "./UCI HAR Dataset/test/y_test.txt"
+* "./UCI HAR Dataset/test/subject_test.txt"
+* "./UCI HAR Dataset/train/X_train.txt"
+* "./UCI HAR Dataset/train/y_train.txt"
+* "./UCI HAR Dataset/train/subject_train.txt"
 
 and manipulates the data present in these files in order to create two tidy data sets
 that respect the requirements in the assignment. The description of how the information
@@ -26,8 +26,8 @@ is provided in details in the comments present in the R script.
 
 These tidy data sets are then saved in the following files:
 
-"./MeanStdFeatures.txt"
-"./MeanStdAverage.txt"
+* "./MeanStdFeatures.txt"
+* "./MeanStdAverage.txt"
 
  The file "./MeanStdFeatures.txt" contains the data set with the measurements on the mean 
  and standard deviation for each feature in the original data set, created respecting the
