@@ -7,6 +7,8 @@
 # prepare the tidy datasets requested for the course project
 # --------------------------------------------------------------------- #
 
+library(dplyr)
+
 # Loads the descriptions for the features (variables) available
 # in the original data set and the activity labels used
 features <- read.table("./UCI HAR Dataset/features.txt")
@@ -21,11 +23,13 @@ subjectTest<-read.table("./UCI HAR Dataset/test/subject_test.txt")
 # a flat table containing all the information for the test dataset
 testDataSet <- cbind(subjectTest, yTest, xTest)
 
+# Clean up features descriptions to create a tidy set of variable names
+cleanFeatNames <- gsub("-", "_", as.character(features$V2))
+cleanFeatNames <- gsub("()", "", cleanFeatNames, fixed = TRUE)
+    
 # Request 4: Appropriately labels the test data set with 
 # descriptive variable names
-colnames(testDataSet) <- c("Id_Subject", 
-                           "Id_Activity", 
-                           as.character(features$V2))
+colnames(testDataSet) <- c("Id_Subject", "Id_Activity", cleanFeatNames)
 
 # Request 3: Merges the test dataset with the activity labels to provide
 # descriptive activity names instead of IDs in the flat table
@@ -46,9 +50,7 @@ trainDataSet <- cbind(subjectTrain, yTrain, xTrain)
 
 # Request 4: Appropriately labels the train data set with 
 # descriptive variable names
-colnames(trainDataSet) <- c("Id_Subject", 
-                            "Id_Activity", 
-                            as.character(features$V2))
+colnames(trainDataSet) <- c("Id_Subject", "Id_Activity", cleanFeatNames)
 
 # Request 3: Merges the train dataset with the activity labels to provide
 # descriptive activity names instead of IDs in the flat table
@@ -62,29 +64,24 @@ fullDataSet <- rbind(testDataSet, trainDataSet)
 
 # Request 2: Extracts only the measurements on the mean and standard deviation 
 # for each measurement.
-meanStdColumns <- c(3, 2, grep("mean()|std()", names(fullDataSet)))
+meanStdColumns <- c(3, 2, grep("mean|std", names(fullDataSet)))
 meanStdDataSet <- fullDataSet[,meanStdColumns]
-
-# Creates a dplyr table and cleans the column names so that they can
-# be used with the summarize function of the package
-featuresAvg <- as.tbl(meanStdDataSet) 
-colnames(featuresAvg) <- gsub("-", "_", names(featuresAvg))
-colnames(featuresAvg) <- gsub("()", "", names(featuresAvg), fixed = TRUE)
 
 # Request 5: Creates a second, independent tidy data set with the average 
 # of each variable for each activity and each subject.
-featuresAvg <-  featuresAvg %>%
-                group_by(Id_Subject, Activity) %>%
-                summarize_each(funs(mean))
+meanStdAverage <-  as.tbl(meanStdDataSet) %>%
+                   group_by(Id_Subject, Activity) %>%
+                   summarize_each(funs(mean))
 
-# Renames the columns to provide the appropriate name "Avg(<feature>)"
+# Renames the columns to provide the appropriate name "Avg_<feature>"
 # after summarizing using mean()
-changeName <- function(oldName) {paste("Avg(", oldName, ")", sep = "")}
-colNamesAvg <-sapply(names(featuresAvg)[3:ncol(featuresAvg)], changeName)
-colnames(featuresAvg)[3:ncol(featuresAvg)] <- colNamesAvg
+changeName <- function(oldName) {paste("Avg_", oldName, sep = "")}
+colNamesAvg <-sapply(names(meanStdAverage)[3:ncol(meanStdAverage)], changeName)
+colnames(meanStdAverage)[3:ncol(meanStdAverage)] <- colNamesAvg
 
-# write.table(meanStdDataSet, "./FeaturesMeanStd.txt")
-# write.table(featuresAvg, "./FeaturesAverage.txt")
+# Saves the two requested data sets
+write.table(meanStdDataSet, "./MeanStdFeatures.txt")
+write.table(meanStdAverage, "./MeanStdAverage.txt")
 
 
 
