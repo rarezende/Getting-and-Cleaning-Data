@@ -4,7 +4,7 @@
 # Course project R script
 #
 # Cleans and manipulate data from the UCI HAR Dataset in order to 
-# prepare the tidy datasets requested for the course project
+# prepare the tidy dataset requested for the course project
 # --------------------------------------------------------------------- #
 
 library(dplyr)
@@ -79,9 +79,8 @@ changeName <- function(oldName) {paste("Avg_", oldName, sep = "")}
 colNamesAvg <-sapply(names(meanStdAverage)[3:ncol(meanStdAverage)], changeName)
 colnames(meanStdAverage)[3:ncol(meanStdAverage)] <- colNamesAvg
 
-# Saves the two requested data sets
-write.table(meanStdDataSet, "./MeanStdFeatures.txt")
-write.table(meanStdAverage, "./MeanStdAverage.txt")
+# Saves the requested data set
+write.table(meanStdAverage, "./MeanStdAverage.txt", row.names = FALSE)
 
 
 

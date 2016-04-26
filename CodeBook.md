@@ -35,6 +35,45 @@ Using the "dplyr" package, the table containing only mean and standard deviation
 The names of the columns in the resulting summarized table were then changed to contain the prefix "Avg_" to reflect
 their actual content.
 
+The resulting data set has the following variables:
+
+Id_Subject
+Activity
+Avg_tBodyAcc_mean_[XYZ]
+Avg_tBodyAcc_std_[XYZ]
+Avg_tGravityAcc_mean_[XYZ]
+Avg_tGravityAcc_std_[XYZ]
+Avg_tBodyAccJerk_mean_[XYZ]
+Avg_tBodyAccJerk_std_[XYZ]
+Avg_tBodyGyro_mean_[XYZ]
+Avg_tBodyGyro_std_[XYZ]
+Avg_tBodyGyroJerk_mean_[XYZ]
+Avg_tBodyGyroJerk_std_[XYZ]
+Avg_tBodyAccMag_mean
+Avg_tBodyAccMag_std
+Avg_tGravityAccMag_mean
+Avg_tGravityAccMag_std
+Avg_tBodyAccJerkMag_mean
+Avg_tBodyAccJerkMag_std
+Avg_tBodyGyroMag_mean
+Avg_tBodyGyroMag_std
+Avg_tBodyGyroJerkMag_mean
+Avg_tBodyGyroJerkMag_std
+Avg_fBodyAcc_mean_[XYZ]
+Avg_fBodyAcc_std_[XYZ]
+Avg_fBodyAccJerk_mean_[XYZ]
+Avg_fBodyAccJerk_std_[XYZ]
+Avg_fBodyGyro_mean_[XYZ]
+Avg_fBodyGyro_std_[XYZ]
+Avg_fBodyAccMag_mean
+Avg_fBodyAccMag_std
+Avg_fBodyAcc_meanFreq_[XYZ]
+Avg_fBodyAccJerk_meanFreq_[XYZ]
+Avg_fBodyGyro_meanFreq_[XYZ]
+Avg_fBodyAccMag_meanFreq
+Avg_fBodyBodyAccJerkMag_meanFreq
+Avg_fBodyBodyGyroMag_meanFreq
+Avg_fBodyBodyGyroJerkMag_meanFreq
 
 
  
